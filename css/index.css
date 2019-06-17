@@ -58,3 +58,7 @@ div.cuadro {
 #buttonIniciarSesion {
     width: -webkit-fill-available;
 }
+
+#mapid {
+    height: 400px;
+}
