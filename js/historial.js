@@ -18,16 +18,16 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
 
         angular.forEach($scope.datosHistorial, function (value, key) {
 
-            if (value.idLugarIncendio == ""
-                || value.coordenadaXIncendio == ""
-                || value.coordenadaYIncendio == "") {
-                $scope.datosHistorial[key]['asignada'] = 'nueva'
+            if (value.idLugarIncendio == true
+                || value.coordenadaXIncendio == true
+                || value.coordenadaYIncendio == true) {
+                console.log($scope.datosHistorial);
         }else {
 
-                $scope.datosHistorial[key]['asignada'] = 'yaAsignada'
-            }
+            alert("No exite historial");
+        }
         });
-        console.log($scope.datosHistorial);
+        
 
     }).catch(function (response) {
         console.error('Error', response.status, response.data);
