@@ -42,12 +42,20 @@ $.get(uriZonas)
             }
 
             var urlDispositivoAleatorizar = "https://proyectofenix.herokuapp.com/update"
-            $.put(urlDispositivoAleatorizar, {
+            /* $.put(urlDispositivoAleatorizar, {
                 dispositivoAleatorio: aleatorio,
                 estadoDispositivoAleatorio: estadoDispositivoAleatorio
-            })
-
-        }, 5000);
+            }) */
+            
+            $.ajax({
+                type: 'PUT', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+                dataType: 'json', // Set datatype - affects Accept header
+                url: urlDispositivoAleatorizar, // A valid URL
+               /*  headers: {"X-HTTP-Method-Override": "PUT"}, */ // X-HTTP-Method-Override set to PUT.
+                data: '{"dispositivoAleatorio": "'+aleatorio+'", "estadoDispositivoAleatorio": "'+estadoDispositivoAleatorio+'"}'
+            });
+            console.log(aleatorio)
+        }, 1000);
 
         //   // DISPOSITIVO 1
         //   var dispositivo1 = L.marker([data.zonas[0].Dispositivos[0].coordenadaXDispositivo, 
@@ -144,7 +152,7 @@ $.get(uriZonas)
     }).fail(function () {
         alert("Ha ocurrido un error")
     })
-    
+
 function numeroAleatorio(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
