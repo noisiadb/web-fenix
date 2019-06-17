@@ -10,7 +10,7 @@ $("#buttonIniciarSesion").on("click", function () {
     }).done(function (data) {
         if (data.encontrado == true) {
             sessionStorage.setItem("Berghain", data.usuario[0]._id)
-            window.location.href = "./historial.html"
+            window.location.href = "./aplicacion.html"
         } else {
             alert("FAIL")
         }
