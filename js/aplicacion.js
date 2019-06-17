@@ -43,8 +43,8 @@ $.get(uriZonas)
 
             var urlDispositivoAleatorizar = "https://proyectofenix.herokuapp.com/update"
             $.put(urlDispositivoAleatorizar, {
-                dispositivoAleatorio : aleatorio,
-                estadoDispositivoAleatorio : estadoDispositivoAleatorio
+                dispositivoAleatorio: aleatorio,
+                estadoDispositivoAleatorio: estadoDispositivoAleatorio
             })
 
         }, 5000);
@@ -144,3 +144,7 @@ $.get(uriZonas)
     }).fail(function () {
         alert("Ha ocurrido un error")
     })
+    
+function numeroAleatorio(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
