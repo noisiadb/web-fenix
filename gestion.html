@@ -26,6 +26,7 @@
   </nav>
 
   <div ng-app="myApp" ng-controller="loadGestion" id="div-table-zonas">
+
     <table class="table table-hover">
       <thead>
         <tr id="table-zonas">
@@ -36,10 +37,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="zona in datosZonas">
-          <td>{{zona.nombreZona}}</td>
-          <td>{{zona.coordenadaXZona}}</td>
-          <td>{{zona.coordenadaYZona}}</td>
+        <tr class="color-2" ng-repeat="zona in datosZonas">
+          <td><span>{{zona.nombreZona}}</span><input type="text"></td>
+          <td><span>{{zona.coordenadaXZona}}</span><input type="text"></td>
+          <td><span>{{zona.coordenadaYZona}}</span><input type="text"></td>
           <td>
             <a href=""><img src="imagenes/editar.png" width="35px" alt="Editar" title="Editar registro"></a>
             <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
@@ -60,10 +61,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="usuario in datosUsuarios">
-          <td>{{usuario.user}}</td>
-          <td>{{usuario.pass}}</td>
-          <td>{{usuario.admin}}</td>
+        <tr class="color-2" ng-repeat="usuario in datosUsuarios">
+          <td><span>{{usuario.user}}</span><input type="text"></td>
+          <td><span>{{usuario.pass}}</span><input type="text"></td>
+          <td><span>{{usuario.admin}}</span><input type="text"></td>
           <td>
             <a><img src="imagenes/editar.png" width="35px" alt="Editar" title="Editar registro"></a>
             <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
