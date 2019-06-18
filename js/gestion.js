@@ -52,12 +52,16 @@ app.controller('loadGestion', function ($scope, $http) {
         $scope.datosUsuarios.splice(index, 1)
         console.log($scope.datosUsuarios)
     }
-    
+
     /* Funcion para editar un registro */
     $scope.activarEdicionRegistroUsuarios = function (index) {
 
-        $("#tabla-usuarios tbody tr:eq("+index+") td span").hide()
-        $("#tabla-usuarios tbody tr:eq("+index+") td input").show()
+        $("#tabla-usuarios tbody tr:eq(" + index + ") td span").hide()
+        $("#tabla-usuarios tbody tr:eq(" + index + ") td input").show()
+
+    }
+
+    $scope.actualizarUsuario = function (index) {
 
     }
 
