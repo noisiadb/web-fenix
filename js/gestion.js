@@ -48,7 +48,7 @@ app.controller('loadGestion', function ($scope, $http) {
     cargarZonas();
 
     /* Funcion para cancelar edicion registros */
-    $scope.deleteRegistroUsuario = function (index) {
+    $scope. RegistroUsuario = function (index) {
         $scope.datosUsuarios.splice(index, 1)
         console.log($scope.datosUsuarios)
     }
