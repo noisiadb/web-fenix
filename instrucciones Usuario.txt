@@ -3,4 +3,12 @@ usuario normal
 admin
 - crud de usuarios y zonas
 
+    "nombreZona": "DoñanaZona1",
+    "coordenadaXZona": 37.0624568,
+    "coordenadaYZona": -6.5371002,
+
+    "user": "Alvaro",
+    "pass": "123",
+    "admin": true
+
 - noob / pass 123
