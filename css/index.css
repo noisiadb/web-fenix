@@ -2,12 +2,14 @@ body {
     background-image: url(../imagenes/fondoPrincipal.jpg);
 }
 
-#table-zonas{
-background: #9eeae826;;
+#table-zonas {
+    background: #005ed72e;
 }
-#color-colum{
-color: #e4282896
+
+#color-colum {
+    font-size: 20px;
 }
+
 img.logo {
     width: 70px;
     height: 75px;
