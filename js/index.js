@@ -10,6 +10,11 @@ $("#buttonIniciarSesion").on("click", function () {
     }).done(function (data) {
         if (data.encontrado == true) {
             sessionStorage.setItem("Berghain", data.usuario[0]._id)
+            if (data.usuario[0].admin == true) {
+                sessionStorage.setItem("admin", true)
+            } else {
+                sessionStorage.setItem("admin", false)
+            }
             window.location.href = "./aplicacion.html"
         } else {
             alert("FAIL")
