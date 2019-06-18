@@ -3,34 +3,24 @@ if (sessionStorage.getItem("Berghain") == undefined
     window.location.href = "./index.html"
 }
 
-
 // Angular, peticion API
-var app = angular.module('myApp', ['ngStorage']);
-app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $http) {
-    
-    const uriCargar = "https://proyectofenix.herokuapp.com/validar"
-    $scope.datosHistorial = [];
+var app = angular.module('myApp', []);
+app.controller('loadIncendios', function ($scope, $http) {
 
-    $http.post(uriCargar).then(function (response) {
-        var historial;
-        $scope.historial = response.data.historial
-        $scope.datosHistorial = historial
+    const uriCargar = "https://proyectofenix.herokuapp.com/mapa"
+    $scope.datosHistorialIncendio = [];
 
-        angular.forEach($scope.datosHistorial, function (value, key) {
+    console.log("Estoy dentro");
 
-            if (value.idLugarIncendio == true
-                || value.coordenadaXIncendio == true
-                || value.coordenadaYIncendio == true) {
-                console.log($scope.datosHistorial);
-        }else {
+    $http.get(uriCargar)
+        .then(function (response) {
 
-            alert("No exite historial");
-        }
-        });
-        
+            $scope.datosHistorialIncendio = response.data.zonas[0].Incendios
+            console.log($scope.datosHistorialIncendio)
 
-    }).catch(function (response) {
-        console.error('Error', response.status, response.data);
-    })
+
+        }).catch(function (response) {
+            console.error('Error', response.status, response.data);
+        })
 
 });

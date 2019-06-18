@@ -2,42 +2,49 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Historial</title>
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="./js/historial.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+  <meta charset="utf-8">
+  <title>Historial</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-center">
-            <li><img class="logo" src="imagenes/logo.png" /></li>
-            <li><a href="aplicacion.html">Aplicación</a></li>
-            <li><a href="historial.html">Historial</a></li>
-            <li><a href="" id="cerrarSesion">Cerrar Sesión</a></li>
-          </ul>
-        </div>
-      </nav>
-    
-  <nav> 
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-center">
+        <li><img class="logo" src="imagenes/logo.png" /></li>
+        <li><a href="aplicacion.html">Aplicación</a></li>
+        <li><a href="historial.html">Historial</a></li>
+        <li><a href="" id="cerrarSesion">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div ng-app="myApp" ng-controller="loadIncendios">
     <table class="table">
       <thead>
-          <tr>
-              <th scope="col">Lugar</th>
-              <th scope="col">CY</th>
-              <th scope="col">CX</th>
-          </tr>
+        <tr>
+          <th scope="col">Lugar</th>
+          <th scope="col">CY</th>
+          <th scope="col">CX</th>
+        </tr>
       </thead>
+      <tbody>
+        <tr ng-repeat="incendio in datosHistorialIncendio">
+          <td>{{ incendio.idLugarIncendio }}</td>
+          <td>{{ incendio.coordenadaYIncendio }}</td>
+          <td>{{ incendio.coordenadaXIncendio }}</td>
+        </tr>
+      </tbody>
     </table>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="./js/cerrarSesion.js"></script>
-
+  </div>
+  
+  <script src="./js/historial.js"></script>
+  <script src="./js/cerrarSesion.js"></script>
+  
 </body>
 
 </html>
