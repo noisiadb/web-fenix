@@ -3,6 +3,9 @@ usuario normal
 admin
 - crud de usuarios y zonas
 
+- insertar
+- update / editar
+
     "nombreZona": "DoñanaZona1",
     "coordenadaXZona": 37.0624568,
     "coordenadaYZona": -6.5371002,
