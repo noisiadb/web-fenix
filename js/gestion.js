@@ -12,32 +12,145 @@ app.controller('loadGestion', function ($scope, $http) {
     $scope.datosZonas = [];
     $scope.datosUsuarios = [];
 
-    /* Peticion API - Carga de zonas */
-    $http.get(uriCargarZonas)
-        .then(function (response) {
+    /* Function - Peticion API - Carga de zonas */
+    function cargarZonas() {
+        $http.get(uriCargarZonas)
+            .then(function (response) {
 
-            $scope.datosZonas = response.data.zonas
-            console.log($scope.datosZonas)
+                $scope.datosZonas = response.data.zonas
+                console.log($scope.datosZonas)
 
-        }).catch(function (response) {
-            console.error('Error', response.status, response.data);
-        })
+            }).catch(function (response) {
+                console.error('Error', response.status, response.data);
+            })
+    }
 
-    /* Peticion API - Carga de Usuarios */
-    $http.get(uriCargarUsuarios)
-        .then(function (response) {
+    /* Funcion - Peticion API - Carga de Usuarios */
+    function cargarUsuarios() {
+        $http.get(uriCargarUsuarios)
+            .then(function (response) {
 
-            $scope.datosUsuarios = response.data.usuarios
-            console.log($scope.datosUsuarios)
+                $scope.datosUsuarios = response.data.usuarios
+                console.log($scope.datosUsuarios)
 
-        }).catch(function (response) {
-            console.error('Error', response.status, response.data);
-        })
+            }).catch(function (response) {
+                console.error('Error', response.status, response.data);
+            })
+    }
+
+    /* Cargamos los usuarios y los guardamos en el $scope de usuarios */
+    cargarUsuarios();
+    /* Cargamos las zonas y los guardamos en el $scope de zonas */
+    cargarZonas();
 
     /* Funcion para cancelar edicion registros */
     $scope.deleteRegistroUsuario = function (index) {
         $scope.datosUsuarios.splice(index, 1)
         console.log($scope.datosUsuarios)
     }
+
+
+
+    /* Funcion para actualizar la zona */
+    $scope.actualizarMatricula = function (index) {
+        var r = confirm("¿Desea actualizar la zona " + dia + "?");
+        if (r == true) {
+
+            const urlEditarZona = "https://proyecto-mdc-api.herokuapp.com/zona/editar/" + $scope.datosZonas
+
+            $http.put(urlEditarZona, {
+
+                nombre_completo: {
+                    nombre: $scope.verValueNombre,
+                    primer_apellido: $scope.verValuePrimerApellido,
+                    segundo_apellido: $scope.verValueSegundoApellido
+                },
+
+                dni: {
+                    numero: $scope.verValueNumeroDocumentacion,
+                    tipo_documentacion: $scope.verValueTipoDocumentacion
+                },
+
+                fecha_nacimiento: {
+                    dia: dia,
+                    mes: mes,
+                    anio: anio
+                },
+
+                nacionalidad: $scope.verValueNacionalidad,
+                provincia: $scope.verValueProvincia,
+
+                localidad: {
+                    codigo_postal: $scope.verValueCodigoPostal,
+                    nombre: $scope.verValueLocalidad
+                },
+
+                domicilio: {
+                    calle: $scope.verValueCalleDomicilio,
+                    numero: $scope.verValueNumeroDomicilio
+                },
+
+                telefono: $scope.verValueTelefono,
+                email: $scope.verValueEmail,
+
+                estado_matricula: estadoNuevoMatricula,
+                motivoError: $scope.motivoError
+
+            }).then(function (response) {
+                console.log(response.data);
+            }).catch(function (response) {
+                console.log('Error', response.status, response.data);
+            })
+
+            /* Vaciamos $scope de las matriculas */
+            $scope.matriculasPendientes = [];
+
+            setTimeout(function () {
+                $http.post(uriCargar, {
+                    estado: "pendiente"
+                }).then(function (response) {
+                    var matriculas;
+                    matriculas = response.data.matriculas
+                    $scope.matriculasPendientes = matriculas
+
+                    /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
+                    encuentran */
+                    angular.forEach($scope.matriculasPendientes, function (value, key) {
+
+                        /* Asigamos niveles */
+
+                        /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
+                        es una matricula nueva */
+                        if (value.idUsuarioAsignado == ""
+                            || value.idUsuarioAsignado == "x"
+                            || value.idUsuarioAsignado == undefined) {
+                            $scope.matriculasPendientes[key]['asignada'] = 'nueva'
+
+                            /* Si el valor es igual al id del usuario logeado es una matricula
+                            que tiene asignada */
+                        } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
+                            $scope.matriculasPendientes[key]['asignada'] = 'propia'
+
+                            /* Entonces lo unico que queda darle el nivel de que esta asignada
+                            a otro usuario del sistema diferente */
+                        } else {
+                            $scope.matriculasPendientes[key]['asignada'] = 'yaAsignada'
+                        }
+
+                    });
+
+                    /* Matriculas */
+                    console.log($scope.matriculasPendientes);
+
+                    $(".divTablaPendientes").show()
+                    $("#divMatriculaVer").hide()
+
+                }).catch(function (response) {
+                    console.error('Error', response.status, response.data);
+                })
+            }, 500)
+        }
+    }
+
 
 });
