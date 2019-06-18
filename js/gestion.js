@@ -4,7 +4,7 @@ if (sessionStorage.getItem("Berghain") == undefined
 }
 
 var app = angular.module('myApp', []);
-app.controller('loadIncendios', function ($scope, $http) {
+app.controller('loadGestion', function ($scope, $http) {
 
     const uriCargarZonas = "https://proyectofenix.herokuapp.com/mapa";
     const uriCargarUsuarios = "https://proyectofenix.herokuapp.com/usuarios";

@@ -6,8 +6,13 @@ body {
     background: #005ed72e;
 }
 
+<<<<<<< HEAD
 #color-colum {
     font-size: 20px;
+=======
+#color-colum{
+color: #e4282896
+>>>>>>> master
 }
 
 img.logo {
