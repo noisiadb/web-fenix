@@ -6,18 +6,29 @@ if (sessionStorage.getItem("Berghain") == undefined
 var app = angular.module('myApp', []);
 app.controller('loadIncendios', function ($scope, $http) {
 
-    const uriCargar = "https://proyectofenix.herokuapp.com/mapa"
-    const uriCargar = "https://proyectofenix.herokuapp.com/usuarios"
-    $scope.datosHistorialIncendio = [];
+    const uriCargarZonas = "https://proyectofenix.herokuapp.com/mapa";
+    const uriCargarUsuarios = "https://proyectofenix.herokuapp.com/usuarios";
 
-    console.log("Estoy dentro");
+    $scope.datosZonas = [];
+    $scope.datosUsuarios = [];
 
-    $http.get(uriCargar)
+    /* Peticion API - Carga de zonas */
+    $http.get(uriCargarZonas)
         .then(function (response) {
 
-            $scope.datosHistorialIncendio = response.data.zonas[0].Incendios
-            console.log($scope.datosHistorialIncendio)
+            $scope.datosZonas = response.data.zonas
+            console.log($scope.datosZonas)
 
+        }).catch(function (response) {
+            console.error('Error', response.status, response.data);
+        })
+
+    /* Peticion API - Carga de Usuarios */
+    $http.get(uriCargarUsuarios)
+        .then(function (response) {
+
+            $scope.datosUsuarios = response.data.usuarios
+            console.log($scope.datosUsuarios)
 
         }).catch(function (response) {
             console.error('Error', response.status, response.data);
