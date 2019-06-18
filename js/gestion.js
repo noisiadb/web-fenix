@@ -3,6 +3,10 @@ if (sessionStorage.getItem("Berghain") == undefined
     window.location.href = "./index.html"
 }
 
+/* Ocultamos todos los inputs, menos el de crear un usuario */
+$("#tabla-usuarios tbody tr td input").hide()
+$("#tabla-usuarios tbody tr:last td input").show()
+
 var app = angular.module('myApp', []);
 app.controller('loadGestion', function ($scope, $http) {
 
@@ -48,109 +52,81 @@ app.controller('loadGestion', function ($scope, $http) {
         $scope.datosUsuarios.splice(index, 1)
         console.log($scope.datosUsuarios)
     }
+    
+    /* Funcion para editar un registro */
+    $scope.activarEdicionRegistroUsuarios = function (index) {
 
+        $("#tabla-usuarios tbody tr:eq("+index+") td span").hide()
+        $("#tabla-usuarios tbody tr:eq("+index+") td input").show()
 
+    }
 
-    /* Funcion para actualizar la zona */
-    $scope.actualizarMatricula = function (index) {
-        var r = confirm("¿Desea actualizar la zona " + dia + "?");
+    /* Funcion para actualizar la zona que estamos editando */
+    $scope.actualizarZona = function (index) {
+
+        /* Ventana de confirmación de actualización */
+        var r = confirm("¿Desea actualizar la zona " + $scope.datosZonas[index].nombreZona + "?");
         if (r == true) {
 
+            /* URL de la peticion de edicion */
             const urlEditarZona = "https://proyecto-mdc-api.herokuapp.com/zona/editar/" + $scope.datosZonas
 
             $http.put(urlEditarZona, {
-
-                nombre_completo: {
-                    nombre: $scope.verValueNombre,
-                    primer_apellido: $scope.verValuePrimerApellido,
-                    segundo_apellido: $scope.verValueSegundoApellido
-                },
-
-                dni: {
-                    numero: $scope.verValueNumeroDocumentacion,
-                    tipo_documentacion: $scope.verValueTipoDocumentacion
-                },
-
-                fecha_nacimiento: {
-                    dia: dia,
-                    mes: mes,
-                    anio: anio
-                },
-
-                nacionalidad: $scope.verValueNacionalidad,
-                provincia: $scope.verValueProvincia,
-
-                localidad: {
-                    codigo_postal: $scope.verValueCodigoPostal,
-                    nombre: $scope.verValueLocalidad
-                },
-
-                domicilio: {
-                    calle: $scope.verValueCalleDomicilio,
-                    numero: $scope.verValueNumeroDomicilio
-                },
-
-                telefono: $scope.verValueTelefono,
-                email: $scope.verValueEmail,
-
-                estado_matricula: estadoNuevoMatricula,
-                motivoError: $scope.motivoError
 
             }).then(function (response) {
                 console.log(response.data);
             }).catch(function (response) {
                 console.log('Error', response.status, response.data);
             })
-
-            /* Vaciamos $scope de las matriculas */
-            $scope.matriculasPendientes = [];
-
-            setTimeout(function () {
-                $http.post(uriCargar, {
-                    estado: "pendiente"
-                }).then(function (response) {
-                    var matriculas;
-                    matriculas = response.data.matriculas
-                    $scope.matriculasPendientes = matriculas
-
-                    /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
-                    encuentran */
-                    angular.forEach($scope.matriculasPendientes, function (value, key) {
-
-                        /* Asigamos niveles */
-
-                        /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
-                        es una matricula nueva */
-                        if (value.idUsuarioAsignado == ""
-                            || value.idUsuarioAsignado == "x"
-                            || value.idUsuarioAsignado == undefined) {
-                            $scope.matriculasPendientes[key]['asignada'] = 'nueva'
-
-                            /* Si el valor es igual al id del usuario logeado es una matricula
-                            que tiene asignada */
-                        } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
-                            $scope.matriculasPendientes[key]['asignada'] = 'propia'
-
-                            /* Entonces lo unico que queda darle el nivel de que esta asignada
-                            a otro usuario del sistema diferente */
-                        } else {
-                            $scope.matriculasPendientes[key]['asignada'] = 'yaAsignada'
-                        }
-
-                    });
-
-                    /* Matriculas */
-                    console.log($scope.matriculasPendientes);
-
-                    $(".divTablaPendientes").show()
-                    $("#divMatriculaVer").hide()
-
-                }).catch(function (response) {
-                    console.error('Error', response.status, response.data);
-                })
-            }, 500)
         }
     }
+
+    /* Vaciamos $scope de las matriculas */
+    $scope.matriculasPendientes = [];
+
+    setTimeout(function () {
+        $http.post(uriCargar, {
+            estado: "pendiente"
+        }).then(function (response) {
+            var matriculas;
+            matriculas = response.data.matriculas
+            $scope.matriculasPendientes = matriculas
+
+            /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
+            encuentran */
+            angular.forEach($scope.matriculasPendientes, function (value, key) {
+
+                /* Asigamos niveles */
+
+                /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
+                es una matricula nueva */
+                if (value.idUsuarioAsignado == ""
+                    || value.idUsuarioAsignado == "x"
+                    || value.idUsuarioAsignado == undefined) {
+                    $scope.matriculasPendientes[key]['asignada'] = 'nueva'
+
+                    /* Si el valor es igual al id del usuario logeado es una matricula
+                    que tiene asignada */
+                } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
+                    $scope.matriculasPendientes[key]['asignada'] = 'propia'
+
+                    /* Entonces lo unico que queda darle el nivel de que esta asignada
+                    a otro usuario del sistema diferente */
+                } else {
+                    $scope.matriculasPendientes[key]['asignada'] = 'yaAsignada'
+                }
+            });
+
+            /* Matriculas */
+            console.log($scope.matriculasPendientes);
+
+            $(".divTablaPendientes").show()
+            $("#divMatriculaVer").hide()
+
+        }).catch(function (response) {
+            console.error('Error', response.status, response.data);
+        })
+    }, 500)
 
 
 });
