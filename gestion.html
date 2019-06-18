@@ -36,15 +36,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="usuario in datosZonas">
+        <tr ng-repeat="zona in datosZonas">
           <td>{{zona.nombreZona}}</td>
           <td>{{zona.coordenadaXZona}}</td>
           <td>{{zona.coordenadaYZona}}</td>
           <td>
             <a href=""><img src="imagenes/editar.png" width="35px" alt="Editar" title="Editar registro"></a>
-            <a href=""><img src="imagenes/enviar.png" width="35px" alt="Editar" title="Editar registro"></a>
-            <a href=""><img src="imagenes/guardar.png" width="35px" alt="Editar" title="Editar registro"></a>
-            <a href=""><img src="imagenes/eliminar.png" width="35px" alt="Editar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/eliminar.png" width="35px" alt="eliminar" title="Editar registro"></a>
           </td>
         </tr>
       </tbody>
@@ -66,9 +66,9 @@
           <td>{{usuario.admin}}</td>
           <td>
             <a><img src="imagenes/editar.png" width="35px" alt="Editar" title="Editar registro"></a>
-            <a href=""><img src="imagenes/enviar.png" width="35px" alt="Editar" title="Editar registro"></a>
-            <a href=""><img src="imagenes/guardar.png" width="35px" alt="Editar" title="Editar registro"></a>
-            <a><img src="imagenes/eliminar.png" ng-click="deleteRegistroUsuario($index)" width="35px" alt="Editar"
+            <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
+            <a><img src="imagenes/eliminar.png" ng-click="deleteRegistroUsuario($index)" width="35px" alt="eliminar"
                 title="Editar registro"></a>
           </td>
         </tr>
@@ -78,7 +78,5 @@
   </div>
   <script src="./js/gestion.js"></script>
   <script src="./js/cerrarSesion.js"></script>
-
 </body>
-
 </html>
