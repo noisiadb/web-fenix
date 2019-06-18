@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Gestion</title>
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
@@ -25,13 +25,14 @@
     </div>
   </nav>
 
-  <div ng-app="myApp" ng-controller="loadGestion">
+  <div ng-app="myApp" ng-controller="loadGestion" id="div-table-zonas">
     <table class="table table-hover">
       <thead>
-        <tr>
+        <tr id="table-zonas">
           <th scope="col">Nombre</th>
           <th scope="col">Coordenadas X</th>
           <th scope="col">Coordenadas Y</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -39,6 +40,12 @@
           <td>{{zona.nombreZona}}</td>
           <td>{{zona.coordenadaXZona}}</td>
           <td>{{zona.coordenadaYZona}}</td>
+          <td>
+            <a href=""><img src="imagenes/editar.png" width="35px" alt="Editar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/enviar.png" width="35px" alt="Editar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/guardar.png" width="35px" alt="Editar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/eliminar.png" width="35px" alt="Editar" title="Editar registro"></a>
+          </td>
         </tr>
       </tbody>
     </table>
