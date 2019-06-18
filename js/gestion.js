@@ -34,4 +34,9 @@ app.controller('loadGestion', function ($scope, $http) {
             console.error('Error', response.status, response.data);
         })
 
+    $scope.deleteRegistroUsuario = function (index) {
+        $scope.datosUsuarios.splice(index, 1)
+        console.log($scope.datosUsuarios)
+    }
+
 });

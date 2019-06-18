@@ -36,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="zona in datosZonas">
+        <tr ng-repeat="usuario in datosZonas">
           <td>{{zona.nombreZona}}</td>
           <td>{{zona.coordenadaXZona}}</td>
           <td>{{zona.coordenadaYZona}}</td>
@@ -45,6 +45,31 @@
             <a href=""><img src="imagenes/enviar.png" width="35px" alt="Editar" title="Editar registro"></a>
             <a href=""><img src="imagenes/guardar.png" width="35px" alt="Editar" title="Editar registro"></a>
             <a href=""><img src="imagenes/eliminar.png" width="35px" alt="Editar" title="Editar registro"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-hover">
+      <thead>
+        <tr id="table-zonas">
+          <th scope="col">Nombre</th>
+          <th scope="col">Pass</th>
+          <th scope="col">Admin</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="usuario in datosUsuarios">
+          <td>{{usuario.user}}</td>
+          <td>{{usuario.pass}}</td>
+          <td>{{usuario.admin}}</td>
+          <td>
+            <a><img src="imagenes/editar.png" width="35px" alt="Editar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/enviar.png" width="35px" alt="Editar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/guardar.png" width="35px" alt="Editar" title="Editar registro"></a>
+            <a><img src="imagenes/eliminar.png" ng-click="deleteRegistroUsuario($index)" width="35px" alt="Editar"
+                title="Editar registro"></a>
           </td>
         </tr>
       </tbody>
