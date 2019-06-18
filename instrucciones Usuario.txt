@@ -1,0 +1,6 @@
+usuario normal
+- consulta de zonas
+admin
+- crud de usuarios y zonas
+
+- noob / pass 123
