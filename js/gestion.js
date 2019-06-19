@@ -5,7 +5,7 @@ if (sessionStorage.getItem("Berghain") == undefined
 
 /* Ocultamos todos los inputs, menos el de crear un usuario */
 $("#tabla-usuarios tbody tr td input").hide()
-$("#tabla-usuarios tbody tr:last td input").show()
+$("#tabla-usuarios tbody tr:first td input").show()
 
 var app = angular.module('myApp', []);
 app.controller('loadGestion', function ($scope, $http) {

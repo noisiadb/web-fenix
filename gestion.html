@@ -61,6 +61,19 @@
         </tr>
       </thead>
       <tbody>
+          <tr>
+              <td><span></span><input type="text"></td>
+              <td><span></span><input type="text"></td>
+              <td><span></span><input type="text"></td>
+              <td>
+                <!-- <a><img src="imagenes/editar.png" ng-click="activarEdicionRegistroUsuarios($index)" width="35px"
+                    alt="Editar" title="Editar registro"></a> -->
+                <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
+                <!-- <a href=""><img src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
+                <a><img src="imagenes/eliminar.png" ng-click="deleteRegistroUsuario($index)" width="35px" alt="eliminar"
+                    title="Editar registro"></a> -->
+              </td>
+            </tr>
         <tr class="color-2" ng-repeat="usuario in datosUsuarios">
           <td><span>{{usuario.user}}</span><input ng-model="usuario.user" type="text"></td>
           <td><span>{{usuario.pass}}</span><input ng-model="usuario.pass" type="text"></td>
@@ -68,25 +81,12 @@
           <td>
             <a><img src="imagenes/editar.png" ng-click="activarEdicionRegistroUsuarios($index)" width="35px"
                 alt="Editar" title="Editar registro"></a>
-            <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
             <a href=""><img src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
             <a><img src="imagenes/eliminar.png" ng-click="deleteRegistroUsuario($index)" width="35px" alt="eliminar"
                 title="Editar registro"></a>
           </td>
         </tr>
-        <tr>
-          <td><span></span><input type="text"></td>
-          <td><span></span><input type="text"></td>
-          <td><span></span><input type="text"></td>
-          <td>
-            <!-- <a><img src="imagenes/editar.png" ng-click="activarEdicionRegistroUsuarios($index)" width="35px"
-                alt="Editar" title="Editar registro"></a> -->
-            <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
-            <!-- <a href=""><img src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
-            <a><img src="imagenes/eliminar.png" ng-click="deleteRegistroUsuario($index)" width="35px" alt="eliminar"
-                title="Editar registro"></a> -->
-          </td>
-        </tr>
+        
       </tbody>
     </table>
 
