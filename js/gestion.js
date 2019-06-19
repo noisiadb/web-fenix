@@ -7,6 +7,10 @@ if (sessionStorage.getItem("Berghain") == undefined
 $("#tabla-usuarios tbody tr td input").hide()
 $("#tabla-usuarios tbody tr:first td input").show()
 
+/* Ocultamos todos los inputs, menos el de crear un usuario */
+$("#tabla-zonas tbody tr td input").hide()
+$("#tabla-zonas tbody tr:first td input").show()
+
 var app = angular.module('myApp', []);
 app.controller('loadGestion', function ($scope, $http) {
 
@@ -35,6 +39,9 @@ app.controller('loadGestion', function ($scope, $http) {
             .then(function (response) {
 
                 $scope.datosUsuarios = response.data.usuarios
+                angular.forEach($scope.datosUsuarios, function (value, key) {
+                    $scope.datosUsuarios[key]['editando'] = true
+                });
                 console.log($scope.datosUsuarios)
 
             }).catch(function (response) {
@@ -47,17 +54,55 @@ app.controller('loadGestion', function ($scope, $http) {
     /* Cargamos las zonas y los guardamos en el $scope de zonas */
     cargarZonas();
 
-    /* Funcion para cancelar edicion registros */
-    $scope. RegistroUsuario = function (index) {
-        $scope.datosUsuarios.splice(index, 1)
-        console.log($scope.datosUsuarios)
+    /* Funcion para cancelar edicion registros de Usuarios */
+    $scope.cancelarRegistroUsuario = function (index) {
+
+        $scope.datosUsuarios[index].editando = true
+
+        $("#tabla-usuarios tbody tr td input").hide()
+        $("#tabla-usuarios tbody tr:first td input").show()
+        $("#tabla-usuarios tbody tr td span").show()
+
+        $("#tabla-usuarios tbody tr:eq(" + (index+1) + ") td span").show()
     }
 
-    /* Funcion para editar un registro */
+    /* Funcion para cancelar edicion registros de Zonas */
+    $scope.cancelarRegistroZonas = function (index) {
+
+        $("#tabla-zonas tbody tr td input").hide()
+        $("#tabla-zonas tbody tr:first td input").show()
+        $("#tabla-zonas tbody tr td span").show()
+
+        $("#tabla-zonas tbody tr:eq(" + (index+1) + ") td span").show()
+    }
+
+    /* Funcion para activar la edicion de un registro de Usuarios */
     $scope.activarEdicionRegistroUsuarios = function (index) {
 
-        $("#tabla-usuarios tbody tr:eq(" + index + ") td span").hide()
-        $("#tabla-usuarios tbody tr:eq(" + index + ") td input").show()
+        angular.forEach($scope.datosUsuarios, function (value, key) {
+            $scope.datosUsuarios[key]['editando'] = true
+        });
+        
+        $scope.datosUsuarios[index].editando = false
+
+        $("#tabla-usuarios tbody tr td input").hide()
+        $("#tabla-usuarios tbody tr:first td input").show()
+        $("#tabla-usuarios tbody tr td span").show()
+
+        $("#tabla-usuarios tbody tr:eq(" + (index+1) + ") td span").hide()
+        $("#tabla-usuarios tbody tr:eq(" + (index+1) + ") td input").show()
+        
+    }
+    
+    /* Funcion para activar la edicion de un registro de Zonas */
+    $scope.activarEdicionRegistroZonas = function (index) {
+        
+        $("#tabla-zonas tbody tr td input").hide()
+        $("#tabla-zonas tbody tr:first td input").show()
+        $("#tabla-zonas tbody tr td span").show()
+    
+        $("#tabla-zonas tbody tr:eq(" + (index+1) + ") td span").hide()
+        $("#tabla-zonas tbody tr:eq(" + (index+1) + ") td input").show()
 
     }
 

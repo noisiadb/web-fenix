@@ -7,16 +7,25 @@ body {
     font-size: 20px;
 }
 
-.color-2{
+.color-2 {
     background: #98e5f730;
 }
 
-#div-table-zonas{
+#div-table-zonas {
     margin-top: 50px;
 }
 
 .table>tbody>tr>td {
     vertical-align: middle;
+}
+
+#color-lugar {
+    background: #6b8dda4d;
+    font-size: x-large;
+}
+
+#color-tabla-lugar {
+    background: #e18b8b85;
 }
 
 img.logo {
@@ -77,5 +86,5 @@ div.cuadro {
 }
 
 #mapid {
-    height: 400px;
+    height: 680px;
 }

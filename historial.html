@@ -27,13 +27,13 @@
   <div ng-app="myApp" ng-controller="loadIncendios">
     <table class="table">
       <thead>
-        <tr>
-          <th scope="col">Lugar</th>
+        <tr id="color-lugar"">
+          <th scope=" col">Lugar</th>
           <th scope="col">CY</th>
           <th scope="col">CX</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="color-tabla-lugar">
         <tr ng-repeat="incendio in datosHistorialIncendio">
           <td>{{ incendio.idLugarIncendio }}</td>
           <td>{{ incendio.coordenadaYIncendio }}</td>
@@ -42,10 +42,10 @@
       </tbody>
     </table>
   </div>
-  
+
   <script src="./js/historial.js"></script>
   <script src="./js/cerrarSesion.js"></script>
-  
+
 </body>
 
 </html>
