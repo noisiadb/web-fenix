@@ -63,7 +63,7 @@ app.controller('loadGestion', function ($scope, $http) {
         $("#tabla-usuarios tbody tr:first td input").show()
         $("#tabla-usuarios tbody tr td span").show()
 
-        $("#tabla-usuarios tbody tr:eq(" + (index+1) + ") td span").show()
+        $("#tabla-usuarios tbody tr:eq(" + (index + 1) + ") td span").show()
     }
 
     /* Funcion para cancelar edicion registros de Zonas */
@@ -73,7 +73,7 @@ app.controller('loadGestion', function ($scope, $http) {
         $("#tabla-zonas tbody tr:first td input").show()
         $("#tabla-zonas tbody tr td span").show()
 
-        $("#tabla-zonas tbody tr:eq(" + (index+1) + ") td span").show()
+        $("#tabla-zonas tbody tr:eq(" + (index + 1) + ") td span").show()
     }
 
     /* Funcion para activar la edicion de un registro de Usuarios */
@@ -82,28 +82,97 @@ app.controller('loadGestion', function ($scope, $http) {
         angular.forEach($scope.datosUsuarios, function (value, key) {
             $scope.datosUsuarios[key]['editando'] = true
         });
-        
+
         $scope.datosUsuarios[index].editando = false
 
         $("#tabla-usuarios tbody tr td input").hide()
         $("#tabla-usuarios tbody tr:first td input").show()
         $("#tabla-usuarios tbody tr td span").show()
 
-        $("#tabla-usuarios tbody tr:eq(" + (index+1) + ") td span").hide()
-        $("#tabla-usuarios tbody tr:eq(" + (index+1) + ") td input").show()
-        
+        $("#tabla-usuarios tbody tr:eq(" + (index + 1) + ") td span").hide()
+        $("#tabla-usuarios tbody tr:eq(" + (index + 1) + ") td input").show()
+
     }
-    
+
     /* Funcion para activar la edicion de un registro de Zonas */
     $scope.activarEdicionRegistroZonas = function (index) {
-        
+
         $("#tabla-zonas tbody tr td input").hide()
         $("#tabla-zonas tbody tr:first td input").show()
         $("#tabla-zonas tbody tr td span").show()
-    
-        $("#tabla-zonas tbody tr:eq(" + (index+1) + ") td span").hide()
-        $("#tabla-zonas tbody tr:eq(" + (index+1) + ") td input").show()
 
+        $("#tabla-zonas tbody tr:eq(" + (index + 1) + ") td span").hide()
+        $("#tabla-zonas tbody tr:eq(" + (index + 1) + ") td input").show()
+
+    }
+
+    /* Funcion para crear un usuario */
+    $scope.crearUsuario = function (index) {
+
+        var userAdd = $scope.userAdd
+        var passAdd = $scope.passAdd
+        var adminAdd = $scope.adminAdd
+
+        console.log(userAdd);
+        console.log(passAdd);
+        console.log(adminAdd);
+
+        if (userAdd == "" || userAdd == undefined ||
+            passAdd == "" || passAdd == undefined ||
+            adminAdd == "" || adminAdd == undefined) {
+
+            alert("Faltan campos por introducir")
+
+        } else if (adminAdd == "true" || adminAdd == "false") {
+
+            var r = confirm("Va a crear un nuevo usuario, ¿esta seguro?");
+            if (r == true) {
+                /* URL de la peticion - creacion de usuario */
+                const urlCrearUsuario = "https://proyectofenix.herokuapp.com/usuarios/crear"
+
+                /* Peticion API - Para crear un usuario nuevo */
+                $http.post(urlCrearUsuario, {
+                    user: userAdd,
+                    pass: passAdd,
+                    admin: adminAdd
+                }).then(function (response) {
+                    console.log(response.data);
+                }).catch(function (response) {
+                    console.error('Error', response.status, response.data);
+                })
+
+                /* Recargamos la tabla */
+                setTimeout(function () {
+                    cargarUsuarios();
+                }, 1000)
+
+            }
+        } else {
+            alert("El campo de admin tiene que ser true o false")
+        }
+    }
+
+    /* Función delete a un usuario */
+    $scope.deleteUsuario = function (index) {
+
+        var r = confirm("¿Esta seguro que quiere borrar este usuario?");
+        if (r == true) {
+            const urlDeleteUsuario = "https://proyectofenix.herokuapp.com/usuarios/delete/" + $scope.datosUsuarios[index]._id
+
+            
+
+            $http.delete(uri)
+                .then(function (response) {
+                    console.log(response.data)
+                    $scope.datosUsuarios.splice(index, 1)
+                }).catch(function (response) {
+                    console.error('Error', response.status, response.data);
+                })
+
+            setTimeout(function () {
+                cargarUsuarios()
+            }, 1000)
+        }
     }
 
     $scope.actualizarUsuario = function (index) {
@@ -114,7 +183,8 @@ app.controller('loadGestion', function ($scope, $http) {
     $scope.actualizarZona = function (index) {
 
         /* Ventana de confirmación de actualización */
-        var r = confirm("¿Desea actualizar la zona " + $scope.datosZonas[index].nombreZona + "?");
+        var r = confirm("¿Desea actualizar la zona "
+            + $scope.datosZonas[index].nombreZona + "?");
         if (r == true) {
 
             /* URL de la peticion de edicion */
@@ -129,53 +199,5 @@ app.controller('loadGestion', function ($scope, $http) {
             })
         }
     }
-
-    /* Vaciamos $scope de las matriculas */
-    $scope.matriculasPendientes = [];
-
-    setTimeout(function () {
-        $http.post(uriCargar, {
-            estado: "pendiente"
-        }).then(function (response) {
-            var matriculas;
-            matriculas = response.data.matriculas
-            $scope.matriculasPendientes = matriculas
-
-            /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
-            encuentran */
-            angular.forEach($scope.matriculasPendientes, function (value, key) {
-
-                /* Asigamos niveles */
-
-                /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
-                es una matricula nueva */
-                if (value.idUsuarioAsignado == ""
-                    || value.idUsuarioAsignado == "x"
-                    || value.idUsuarioAsignado == undefined) {
-                    $scope.matriculasPendientes[key]['asignada'] = 'nueva'
-
-                    /* Si el valor es igual al id del usuario logeado es una matricula
-                    que tiene asignada */
-                } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
-                    $scope.matriculasPendientes[key]['asignada'] = 'propia'
-
-                    /* Entonces lo unico que queda darle el nivel de que esta asignada
-                    a otro usuario del sistema diferente */
-                } else {
-                    $scope.matriculasPendientes[key]['asignada'] = 'yaAsignada'
-                }
-            });
-
-            /* Matriculas */
-            console.log($scope.matriculasPendientes);
-
-            $(".divTablaPendientes").show()
-            $("#divMatriculaVer").hide()
-
-        }).catch(function (response) {
-            console.error('Error', response.status, response.data);
-        })
-    }, 500)
-
 
 });

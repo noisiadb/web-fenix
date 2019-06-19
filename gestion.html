@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Gestion</title>
+  <title>Gestión</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -19,7 +19,7 @@
         <li><img class="logo" src="imagenes/logo.png" /></li>
         <li><a href="aplicacion.html">Aplicación</a></li>
         <li><a href="historial.html">Historial</a></li>
-        <li><a href="gestion.html">Gestion</a></li>
+        <li><a href="gestion.html">Gestión</a></li>
         <li><a href="" id="cerrarSesion">Cerrar Sesión</a></li>
       </ul>
     </div>
@@ -56,6 +56,7 @@
           <td><span>{{zona.coordenadaYZona}}</span><input ng-model="zona.coordenadaYZona" type="text"></td>
           <td>
             <a href=""><img src="imagenes/editar.png" ng-click="activarEdicionRegistroZonas($index)" width="35px" alt="Editar" title="Editar registro"></a>
+            <a href=""><img src="imagenes/basura.png" ng-click="activarEdicionRegistroZonas($index)" width="35px" alt="Editar" title="Editar registro"></a>
             <a href=""><img src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
             <a href=""><img src="imagenes/eliminar.png" ng-click="cancelarRegistroZonas($index)" width="35px" alt="eliminar" title="Editar registro"></a>
           </td>
@@ -74,13 +75,13 @@
       </thead>
       <tbody>
           <tr>
-              <td><span></span><input type="text"></td>
-              <td><span></span><input type="text"></td>
-              <td><span></span><input type="text"></td>
+              <td><span></span><input ng-model="userAdd" type="text"></td>
+              <td><span></span><input ng-model="passAdd" type="text"></td>
+              <td><span></span><input ng-model="adminAdd" type="text"></td>
               <td>
                 <!-- <a><img src="imagenes/editar.png" ng-click="activarEdicionRegistroUsuarios($index)" width="35px"
                     alt="Editar" title="Editar registro"></a> -->
-                <a href=""><img src="imagenes/enviar.png" width="35px" alt="enviar" title="Editar registro"></a>
+                <a href=""><img src="imagenes/enviar.png" ng-click="crearUsuario($index)"  width="35px" alt="enviar" title="Editar registro"></a>
                 <!-- <a href=""><img src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
                 <a><img src="imagenes/eliminar.png" ng-click="deleteRegistroUsuario($index)" width="35px" alt="eliminar"
                     title="Editar registro"></a> -->
@@ -93,6 +94,7 @@
           <td>
             <a href=""><img ng-if="usuario.editando == true" src="imagenes/editar.png" ng-click="activarEdicionRegistroUsuarios($index)" width="35px"
                 alt="Editar" title="Editar registro"></a>
+            <a href="#"><img ng-if="usuario.editando == true"  src="imagenes/basura.png" ng-click="deleteUsuario($index)" width="35px" alt="Editar" title="Editar registro"></a>
             <a href=""><img ng-if="usuario.editando == false" src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
             <a href=""><img ng-if="usuario.editando == false" src="imagenes/eliminar.png" ng-click="cancelarRegistroUsuario($index)" width="35px" alt="eliminar"
                 title="Editar registro"></a>
