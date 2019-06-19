@@ -95,7 +95,7 @@
             <a href=""><img ng-if="usuario.editando == true" src="imagenes/editar.png" ng-click="activarEdicionRegistroUsuarios($index)" width="35px"
                 alt="Editar" title="Editar registro"></a>
             <a href="#"><img ng-if="usuario.editando == true"  src="imagenes/basura.png" ng-click="deleteUsuario($index)" width="35px" alt="Editar" title="Editar registro"></a>
-            <a href=""><img ng-if="usuario.editando == false" src="imagenes/guardar.png" width="35px" alt="guardar" title="Editar registro"></a>
+            <a href=""><img ng-if="usuario.editando == false" src="imagenes/guardar.png" ng-click="actualizarUsuario($index)" width="35px" alt="guardar" title="Editar registro"></a>
             <a href=""><img ng-if="usuario.editando == false" src="imagenes/eliminar.png" ng-click="cancelarRegistroUsuario($index)" width="35px" alt="eliminar"
                 title="Editar registro"></a>
           </td>

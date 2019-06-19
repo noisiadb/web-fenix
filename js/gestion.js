@@ -145,7 +145,6 @@ app.controller('loadGestion', function ($scope, $http) {
                 setTimeout(function () {
                     cargarUsuarios();
                 }, 1000)
-
             }
         } else {
             alert("El campo de admin tiene que ser true o false")
@@ -159,9 +158,7 @@ app.controller('loadGestion', function ($scope, $http) {
         if (r == true) {
             const urlDeleteUsuario = "https://proyectofenix.herokuapp.com/usuarios/delete/" + $scope.datosUsuarios[index]._id
 
-            
-
-            $http.delete(uri)
+            $http.delete(urlDeleteUsuario)
                 .then(function (response) {
                     console.log(response.data)
                     $scope.datosUsuarios.splice(index, 1)
@@ -175,8 +172,35 @@ app.controller('loadGestion', function ($scope, $http) {
         }
     }
 
+    /* Funcion de actualizar un usuario */
     $scope.actualizarUsuario = function (index) {
+        var r = confirm("¿Esta seguro que quiere actualizar este usuario?");
+        if (r == true) {
 
+            const urlUpdateUsuario = "https://proyectofenix.herokuapp.com/usuarios/update/" + $scope.datosUsuarios[index]._id
+
+            var userUpdate = $scope.datosUsuarios[index].user
+            var passUpdate = $scope.datosUsuarios[index].pass
+            var adminUpdate = $scope.datosUsuarios[index].admin
+
+            console.log(userUpdate);
+            console.log(passUpdate);
+            console.log(adminUpdate);
+
+            $http.put(urlUpdateUsuario, {
+                user: userUpdate,
+                pass: passUpdate,
+                admin: adminUpdate
+            }).then(function (response) {
+                console.log(response.data);
+            }).catch(function (response) {
+                console.error('Error', response.status, response.data);
+            })
+
+            setTimeout(function () {
+                cargarUsuarios()
+            }, 1000)
+        }
     }
 
     /* Funcion para actualizar la zona que estamos editando */
